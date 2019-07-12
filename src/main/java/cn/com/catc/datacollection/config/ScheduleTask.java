@@ -20,7 +20,7 @@ public class ScheduleTask {
     @Scheduled(cron = "0 0/5 * * * ?")
     private void process() {
 
-        System.out.println("-------------------定时器触发--------------------");
+        System.out.println("-------------------定时器1（间隔5分钟）触发--------------------");
         System.out.println("读取文件中的JSON数据，时间："+dateFormat.format(new Date()));
         System.out.println("文件读取完毕，时间："+dateFormat.format(new Date()));
         System.out.println("-------------------定时器执行结束--------------------");

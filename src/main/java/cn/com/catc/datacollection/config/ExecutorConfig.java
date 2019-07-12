@@ -11,7 +11,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * @Description T
+ * @Description 线程池配置类
  * @Author lwj
  * @Date 2019/7/12
  * @Version 1.0
