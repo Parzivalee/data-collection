@@ -80,6 +80,7 @@ public class ScheduleTask {
             List<String> serversJsonFiles = new ArrayList<>();
             //读取指定文件夹下所有json文件
             FileUtils.getAllFile(serversDirectory, serversJsonFiles);
+            
             System.out.println("->"+serversJsonFiles.size()+"-->"+serversDirectory.getAbsolutePath());
             //对文件内容进行加工处理
             serverService.fileHandler(SERVERSPATH,serversJsonFiles);
