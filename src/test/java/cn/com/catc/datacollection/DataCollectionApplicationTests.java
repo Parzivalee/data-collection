@@ -1,6 +1,7 @@
 package cn.com.catc.datacollection;
 
 import cn.com.catc.datacollection.config.ScheduleTask;
+import cn.com.catc.datacollection.handlers.DeviceService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +20,9 @@ public class DataCollectionApplicationTests {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private DeviceService deviceService;
 
     @Test
     public void contextLoads() {

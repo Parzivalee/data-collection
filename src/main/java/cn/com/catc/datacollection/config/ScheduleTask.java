@@ -60,10 +60,11 @@ public class ScheduleTask {
     /**
      * 定时器1-间隔5分钟触发
      */
-    @Scheduled(cron = "0 0/5 * * * ?")
+    @Scheduled(cron = "0 0/3 * * * ?")
     public void process1() {
         System.out.println("-------------------定时器1（间隔5分钟）触发--------------------");
         System.out.println("读取文件中的JSON数据，时间：" + dateFormat.format(new Date()));
+        System.out.println("定时器线程："+Thread.currentThread().getName());
         try {
             //读取设备文件夹的json文件
             File devicesDirectory = new File(devicesPath);
@@ -94,7 +95,7 @@ public class ScheduleTask {
     /**
      * 定时器2-间隔3分钟触发
      */
-    @Scheduled(cron = "0 0/3 * * * ?")
+    /*@Scheduled(cron = "0 0/3 * * * ?")
     public void process2() {
 
         System.out.println("-------------------定时器2（间隔3分钟）触发--------------------");
@@ -110,6 +111,6 @@ public class ScheduleTask {
         System.out.println("文件读取完毕，时间：" + dateFormat.format(new Date()));
         System.out.println("-------------------定时器执行结束--------------------");
 
-    }
+    }*/
 
 }

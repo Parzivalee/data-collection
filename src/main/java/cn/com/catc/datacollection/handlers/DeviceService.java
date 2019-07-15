@@ -7,4 +7,5 @@ public interface DeviceService {
     void fileHandler(String filePath, List<String> jsonFiles);
 
     void jsonHandler(String json);
+
 }

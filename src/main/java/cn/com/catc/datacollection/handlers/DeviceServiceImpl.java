@@ -7,10 +7,13 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import sun.plugin2.gluegen.runtime.CPU;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Executor;
 
 /**
  * @Description 设备JSON文件处理类
@@ -31,8 +34,12 @@ public class DeviceServiceImpl implements DeviceService {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    public void fileHandler(String filePath, List<String> jsonFiles) {
+    @Autowired
+    private Executor executor;
 
+    @Async
+    public void fileHandler(String filePath, List<String> jsonFiles) {
+        System.out.println("工作线程："+Thread.currentThread().getName());
         System.out.println(jsonFiles.size());
         jsonFiles.stream().forEach(json -> {
             if (json != null)
@@ -47,22 +54,22 @@ public class DeviceServiceImpl implements DeviceService {
                 operationCpu(jsonPath);
                 break;
             case "entity":
-                //OperationEntity(json, jpi);
+                operationEntity(jsonPath);
                 break;
             case "ifvalue":
-                //OperationIfValue(json, jpi);
+                operationIfValue(jsonPath);
                 break;
             case "interface":
-                //OperationInterface(json, jpi);
+                operationInterface(jsonPath);
                 break;
             case "memory":
-                //OperationMemory(json, jpi);
+                operationMemory(jsonPath);
                 break;
             case "sys":
-                //OperationSys(json, jpi);
+                operationSys(jsonPath);
                 break;
             case "vlan":
-                //OperationVlan(json, jpi);
+                operationVlan(jsonPath);
                 break;
             default:
                 break;
@@ -101,4 +108,29 @@ public class DeviceServiceImpl implements DeviceService {
             log.error("ERROR", e);
         }
     }
+
+    public void operationEntity(String jsonPath) {
+
+    }
+
+    public void operationIfValue(String jsonPath) {
+
+    }
+
+    public void operationInterface(String jsonPath) {
+
+    }
+
+    public void operationMemory(String jsonPath) {
+
+    }
+
+    public void operationSys(String jsonPath) {
+
+    }
+
+    public void operationVlan(String jsonPath) {
+
+    }
+
 }

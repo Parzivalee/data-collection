@@ -30,7 +30,7 @@ public class ExecutorConfig {
         //配置最大线程数
         executor.setMaxPoolSize(10);
         //配置队列大小
-        executor.setQueueCapacity(99999);
+        executor.setQueueCapacity(9999);
         //配置线程池中的线程的名称前缀
         executor.setThreadNamePrefix("async-service-");
 
