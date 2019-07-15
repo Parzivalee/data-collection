@@ -1,5 +1,6 @@
 package cn.com.catc.datacollection.entity.system;
 
+import cn.com.catc.datacollection.entity.BaseEntity;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -10,9 +11,7 @@ import java.util.Date;
  * @author 
  */
 @Data
-public class Areas implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Areas extends BaseEntity {
 
     /**
      * 索引

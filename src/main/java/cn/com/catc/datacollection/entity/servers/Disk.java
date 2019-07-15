@@ -1,5 +1,7 @@
 package cn.com.catc.datacollection.entity.servers;
 
+import cn.com.catc.datacollection.entity.BaseEntity;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,9 +9,7 @@ import java.util.Date;
  * TB_BD_CIVIL_SER_DISK
  * @author 
  */
-public class Disk implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Disk extends BaseEntity {
 
     /**
      * 索引(json中无此字段)

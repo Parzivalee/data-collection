@@ -1,5 +1,6 @@
 package cn.com.catc.datacollection.entity.system;
 
+import cn.com.catc.datacollection.entity.BaseEntity;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -10,9 +11,8 @@ import java.util.Date;
  * @author 
  */
 @Data
-public class Roles implements Serializable {
+public class Roles extends BaseEntity {
 
-    private static final long serialVersionUID = 1L;
 
     /**
      * 索引

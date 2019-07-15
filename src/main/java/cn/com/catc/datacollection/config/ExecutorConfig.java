@@ -28,7 +28,7 @@ public class ExecutorConfig {
         //配置核心线程数
         executor.setCorePoolSize(5);
         //配置最大线程数
-        executor.setMaxPoolSize(5);
+        executor.setMaxPoolSize(10);
         //配置队列大小
         executor.setQueueCapacity(99999);
         //配置线程池中的线程的名称前缀

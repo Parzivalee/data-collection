@@ -1,5 +1,6 @@
 package cn.com.catc.datacollection.entity.devices;
 
+import cn.com.catc.datacollection.entity.BaseEntity;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -10,9 +11,7 @@ import java.util.Date;
  * @author 
  */
 @Data
-public class Cpu implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Cpu extends BaseEntity {
 
     /**
      * 索引(json中无此字段)
@@ -30,7 +29,7 @@ public class Cpu implements Serializable {
     private String ipadress;
 
     /**
-     * 入库时间
+     * 记录时间
      */
     private Date recordtime;
 
@@ -43,6 +42,7 @@ public class Cpu implements Serializable {
      * CPU 利用率百分比数据
      */
     private Double value;
+
 
 
 }
