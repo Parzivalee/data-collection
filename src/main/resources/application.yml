@@ -1,3 +1,7 @@
+#JSON Path
+FTPJson:
+  path: E:\lwj-data\FTPJson\201905140840
+
 spring:
   redis:
     remote: false        #cachecloud ªÒ»°
