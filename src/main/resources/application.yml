@@ -1,12 +1,17 @@
 #JSON Path
 ftpjson:
-  devices-path: E:\lwj-data\FTPJson\201905140840\devices
-  servers-path: E:\lwj-data\FTPJson\201905140840\servers
-  manage-path: E:\lwj-data\FTPJson\201905140840\manage
-  resource-path: E:\lwj-data\FTPJson\201905140840\resource
-  system-path: E:\lwj-data\FTPJson\201905140840\system
+  devices-path: Z:\FTPJson\devices
+  servers-path: Z:\FTPJson\servers
+  manage-path: Z:\FTPJson\manage
+  resource-path: Z:\FTPJson\resource
+  system-path: Z:\FTPJson\system
 
 spring:
+#  data:
+#    mongodb:
+#      host: 132.138.7.37
+#      port: 27017
+#      database: local
   redis:
     host: 127.0.0.1
     port: 6379
@@ -40,6 +45,14 @@ redis:
     max-idle: 10
   cache:
     expiration: 3601
+
+catc-ftp:
+  isopen: true
+  host: 132.138.7.205
+  port: 21
+  usernamt: test
+  password: 123456
+  endoding: UTF-8
 
 
 

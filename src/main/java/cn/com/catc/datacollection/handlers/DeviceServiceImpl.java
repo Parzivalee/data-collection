@@ -2,6 +2,7 @@ package cn.com.catc.datacollection.handlers;
 
 import cn.com.catc.datacollection.entity.devices.*;
 import cn.com.catc.datacollection.utils.FileUtils;
+import cn.com.catc.datacollection.utils.MyStringUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 import java.util.concurrent.Executor;
 
 /**
@@ -40,20 +42,28 @@ public class DeviceServiceImpl implements DeviceService {
     @Autowired
     private Executor executor;
 
-    @Async
+//    @Async
     public void fileHandler(String filePath, List<String> jsonFiles) {
-        System.out.println("工作线程：" + Thread.currentThread().getName());
-        System.out.println("开始处理时间：" + dateFormat.format(new Date()));
-        System.out.println(jsonFiles.size());
-        jsonFiles.parallelStream().forEach(json -> {
-            if (json != null)
-                this.jsonHandler(json);
+
+        executor.execute(() -> {
+            System.out.println("工作线程：" + Thread.currentThread().getName());
+            System.out.println("开始处理时间：" + dateFormat.format(new Date()));
+            System.out.println("文件数量："+jsonFiles.size());
+            jsonFiles.stream().forEach(json -> {
+                if (json != null)
+                    jsonHandler(json);
+            });
         });
         System.out.println("结束处理时间：" + dateFormat.format(new Date()));
 
     }
 
     public void jsonHandler(String jsonPath) {
+        //jsonPath 如：Z:\FTPJson\devices\20005\10.1.255.151\cpu.json
+        //组织
+        String areaId = MyStringUtil.getStringAt(jsonPath, 3);
+        //ip地址
+        String ipAddress = MyStringUtil.getStringAt(jsonPath, 4);
         switch (FileUtils.getFileName(jsonPath)) {
             case "cpu":
                 Cpu cpu = new Cpu();
@@ -67,7 +77,8 @@ public class DeviceServiceImpl implements DeviceService {
                     for (int i = 0; i < size; i++) {
                         //对象赋值及insert
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-
+                        cpu.setAreaid(Long.parseLong(areaId));
+                        cpu.setIpadress(ipAddress);
                         cpu.setCpuindex(Integer.parseInt(jsonObject.getString("index")));
                         cpu.setValue(Double.parseDouble(jsonObject.getString("value")));
 
@@ -91,10 +102,8 @@ public class DeviceServiceImpl implements DeviceService {
                     for (int i = 0; i < size; i++) {
                         //对象赋值及insert
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        //TODO
-                        entity.setAreaid(Long.parseLong(jsonPath));
-                        //TODO
-                        entity.setIpadress(jsonPath);
+                        entity.setAreaid(Long.parseLong(areaId));
+                        entity.setIpadress(ipAddress);
                         entity.setPindex(Long.parseLong(jsonObject.getString("pindex")));
                         entity.setEntityindex(Long.parseLong(jsonObject.getString("index")));
                         entity.setClasstype(Integer.parseInt(jsonObject.getString("class")));
@@ -132,10 +141,8 @@ public class DeviceServiceImpl implements DeviceService {
                     for (int i = 0; i < size; i++) {
                         //对象赋值及insert
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        //TODO
-                        ifValue.setAreaid(Long.parseLong(jsonPath));
-                        //TODO
-                        ifValue.setIpadress(jsonPath);
+                        ifValue.setAreaid(Long.parseLong(areaId));
+                        ifValue.setIpadress(ipAddress);
                         try {
                             ifValue.setFluxin(Double.parseDouble(jsonObject.getString("fluxIn")));
                         } catch (Exception e) {
@@ -307,10 +314,8 @@ public class DeviceServiceImpl implements DeviceService {
                     for (int i = 0; i < size; i++) {
                         //对象赋值及insert
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        //TODO
-                        interface1.setAreaid(Long.parseLong(jsonPath));
-                        //TODO
-                        interface1.setIpadress(jsonPath);
+                        interface1.setAreaid(Long.parseLong(areaId));
+                        interface1.setIpadress(ipAddress);
                         try {
                             interface1.setTime(dateFormat.parse(DateFormat.getDateTimeInstance()
                                     .format(Long.parseLong(jsonObject.getString("time")))));
@@ -389,13 +394,11 @@ public class DeviceServiceImpl implements DeviceService {
                         //对象赋值及insert
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         try {
-                            //TODO
-                            memory.setAreaid(Long.parseLong(jsonPath));
+                            memory.setAreaid(Long.parseLong(areaId));
+                            memory.setIpadress(ipAddress);
                         } catch (Exception e) {
                             log.error("ERROR", e);
                         }
-                        //TODO
-                        memory.setIpadress(jsonPath);
                         try {
                             memory.setMemoryindex(Integer.parseInt(jsonObject.getString("index")));
                         } catch (Exception e) {
@@ -428,13 +431,11 @@ public class DeviceServiceImpl implements DeviceService {
                         //对象赋值及insert
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         try {
-                            //TODO
-                            sys.setAreaid(Long.parseLong(jsonPath));
+                            sys.setAreaid(Long.parseLong(areaId));
+                            sys.setIpadress(ipAddress);
                         } catch (Exception e) {
                             log.error("ERROR", e);
                         }
-                        //TODO
-                        sys.setIpadress(jsonPath);
                         try {
                             sys.setSysindex(Integer.parseInt(jsonObject.getString("index")));
                         } catch (Exception e) {
@@ -462,13 +463,11 @@ public class DeviceServiceImpl implements DeviceService {
                         //对象赋值及insert
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         try {
-                            //TODO
-                            vlan.setAreaid(Long.parseLong(jsonPath));
+                            vlan.setAreaid(Long.parseLong(areaId));
+                            vlan.setIpadress(ipAddress);
                         } catch (Exception e) {
                             log.error("ERROR", e);
                         }
-                        //TODO
-                        vlan.setIpadress(jsonPath);
                         try {
                             vlan.setVlanindex(Integer.parseInt(jsonObject.getString("id")));
                         } catch (Exception e) {
